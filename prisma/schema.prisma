@@ -1,0 +1,377 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model TopBar {
+  id              String   @id @default(cuid())
+  email           String
+  address         String
+  hours           String
+  instagram       String?
+  facebook        String?
+  whatsapp        String?
+  twitter         String?
+  showInstagram   Boolean  @default(true)
+  showFacebook    Boolean  @default(true)
+  showWhatsapp    Boolean  @default(true)
+  showTwitter     Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model MainMenu {
+  id          String             @id @default(cuid())
+  label       String
+  href        String?
+  iconPath    String?
+  order       Int                @default(0)
+  isActive    Boolean            @default(true)
+  dropdowns   MainMenuDropdown[]
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
+}
+
+model MainMenuDropdown {
+  id         String   @id @default(cuid())
+  label      String
+  href       String
+  iconPath   String?
+  order      Int      @default(0)
+  isActive   Boolean  @default(true)
+  menuId     String
+  menu       MainMenu @relation(fields: [menuId], references: [id], onDelete: Cascade)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
+
+model Slider {
+  id          String   @id @default(cuid())
+  title       String
+  subtitle    String?
+  image       String   
+  mobileImage String?  
+  ctaText     String?
+  ctaLink     String?
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Service {
+  id              String           @id @default(cuid())
+  title           String
+  icon            String
+  backgroundImage String?          // Background image for header
+  titleColor      String?          // Title color for light backgrounds
+  description     String
+  content         String?          @db.Text  // Detailed content for service page
+  href            String           @unique
+  order           Int              @default(0)
+  isActive        Boolean          @default(true)
+  subServices     SubService[]
+  pricing         ServicePricing[]
+  faqs            ServiceFAQ[]
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+}
+
+model SubService {
+  id              String          @id @default(cuid())
+  title           String
+  description     String          @db.Text
+  backgroundImage String?         // Background image for header
+  gallery1        String?         // Gallery image 1
+  gallery2        String?         // Gallery image 2
+  gallery3        String?         // Gallery image 3
+  gallery4        String?         // Gallery image 4
+  duration        String?         // e.g., "30 min", "1 stunda"
+  price           String?         // e.g., "€50", "Pēc konsultācijas"
+  content         String?         @db.Text  // Detailed content for sub-service page
+  slug            String
+  order           Int             @default(0)
+  isActive        Boolean         @default(true)
+  serviceId       String
+  service         Service         @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  subSubServices  SubSubService[]
+  faqs            SubServiceFAQ[]
+  createdAt       DateTime        @default(now())
+  updatedAt       DateTime        @updatedAt
+
+  @@unique([serviceId, slug]) // Unique slug within each service
+}
+
+model SubSubService {
+  id              String     @id @default(cuid())
+  title           String
+  description     String     @db.Text
+  backgroundImage String?    // Background image for header
+  gallery1        String?    // Gallery image 1
+  gallery2        String?    // Gallery image 2
+  gallery3        String?    // Gallery image 3
+  gallery4        String?    // Gallery image 4
+  duration        String?    // e.g., "30 min", "1 stunda"
+  price           String?    // e.g., "€50", "Pēc konsultācijas"
+  content         String?    @db.Text  // Detailed content for sub-sub-service page
+  slug            String
+  order           Int        @default(0)
+  isActive        Boolean    @default(true)
+  subServiceId    String
+  subService      SubService @relation(fields: [subServiceId], references: [id], onDelete: Cascade)
+  faqs            SubSubServiceFAQ[]
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+
+  @@unique([subServiceId, slug]) // Unique slug within each sub-service
+}
+
+model ExperienceStats {
+  id        String   @id @default(cuid())
+  title     String   
+  number    Int
+  suffix    String   
+  label     String   
+  iconType  String   
+  color     String   
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ExperienceContent {
+  id          String   @id @default(cuid())
+  headerTitle String
+  headerSubtitle String
+  description String   @db.Text
+  companyName String   @default("Veselības un skaistuma centrs Adoria")
+  image       String
+  rating      String
+  address     String
+  email       String
+  phone       String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Testimonial {
+  id          String   @id @default(cuid())
+  name        String
+  text        String   @db.Text
+  rating      Int      @default(5)
+  avatar      String?  
+  service     String?
+  date        DateTime @default(now())
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactInfo {
+  id          String   @id @default(cuid())
+  phone       String
+  email       String
+  address     String
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactBenefit {
+  id          String   @id @default(cuid())
+  text        String
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model ContactService {
+  id          String   @id @default(cuid())
+  name        String
+  order       Int      @default(0)
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Appointment {
+  id                  String   @id @default(cuid())
+  name                String
+  phone               String
+  email               String
+  service             String
+  date                String?
+  time                String?
+  message             String?
+  contactPreferences  Json?
+  source              String   @default("appointment")
+  status              String   @default("pending")
+  emailSent           Boolean  @default(false)
+  reminderSent        DateTime?
+  notes               String?
+  createdAt           DateTime @default(now())
+  updatedAt           DateTime @updatedAt
+}
+
+model BlogPost {
+  id          String   @id @default(cuid())
+  title       String
+  slug        String   @unique
+  content     String   @db.Text
+  image       String?
+  author      String   @default("Adoria komanda")
+  published   Boolean  @default(false)
+  publishedAt DateTime?
+  views       Int      @default(0)
+  tags        String[] @default([])
+  metaTitle   String?
+  metaDescription String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model InfoSection {
+  id          String           @id @default(cuid())
+  title       String
+  subtitle    String
+  content     String           @db.Text
+  isActive    Boolean          @default(true)
+  highlights  InfoHighlight[]
+  createdAt   DateTime         @default(now())
+  updatedAt   DateTime         @updatedAt
+}
+
+model InfoHighlight {
+  id          String      @id @default(cuid())
+  icon        String      // Icon name (Heart, Shield, Users, Star)
+  title       String
+  description String      @db.Text
+  order       Int         @default(0)
+  isActive    Boolean     @default(true)
+  sectionId   String
+  section     InfoSection @relation(fields: [sectionId], references: [id], onDelete: Cascade)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+model FAQ {
+  id        String   @id @default(cuid())
+  question  String   @db.Text
+  answer    String   @db.Text
+  category  String?
+  icon      String   @default("HelpCircle")
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model ServicePricing {
+  id          String        @id @default(cuid())
+  serviceId   String
+  title       String
+  isActive    Boolean       @default(true)
+  order       Int           @default(0)
+  service     Service       @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  pricingItems PricingItem[]
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model PricingItem {
+  id              String         @id @default(cuid())
+  servicePricingId String
+  serviceName     String
+  price           String
+  description     String?        @db.Text
+  order           Int            @default(0)
+  isActive        Boolean        @default(true)
+  servicePricing  ServicePricing @relation(fields: [servicePricingId], references: [id], onDelete: Cascade)
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+}
+
+model SocialLink {
+  id        String   @id @default(cuid())
+  name      String   // Facebook, Instagram, etc.
+  href      String   // URL to social profile
+  icon      String   // Icon file name or path
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model QuickLink {
+  id        String   @id @default(cuid())
+  label     String   // Display text
+  href      String   // URL or path
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model FooterSettings {
+  id                 String   @id @default(cuid())
+  logoPath           String   @default("/footer-logo.png")
+  companyDescription String   @default("Veselības un skaistuma centrs Adoria sniedz kvalitatīvus medicīniskos pakalpojumus visai ģimenei Rīgas centrā.")
+  phone              String   @default("+371 67 315 000")
+  email              String   @default("info@adoria.lv")
+  address            String   @default("A. Čaka iela 70-3, Rīga")
+  showServices       Boolean  @default(true)
+  isActive           Boolean  @default(true)
+  createdAt          DateTime @default(now())
+  updatedAt          DateTime @updatedAt
+}
+
+model ServiceFAQ {
+  id        String   @id @default(cuid())
+  question  String   @db.Text
+  answer    String   @db.Text
+  icon      String   @default("HelpCircle")
+  order     Int      @default(0)
+  isActive  Boolean  @default(true)
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SubServiceFAQ {
+  id           String     @id @default(cuid())
+  question     String     @db.Text
+  answer       String     @db.Text
+  icon         String     @default("HelpCircle")
+  order        Int        @default(0)
+  isActive     Boolean    @default(true)
+  subServiceId String
+  subService   SubService @relation(fields: [subServiceId], references: [id], onDelete: Cascade)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+}
+
+model SubSubServiceFAQ {
+  id              String        @id @default(cuid())
+  question        String        @db.Text
+  answer          String        @db.Text
+  icon            String        @default("HelpCircle")
+  order           Int           @default(0)
+  isActive        Boolean       @default(true)
+  subSubServiceId String
+  subSubService   SubSubService @relation(fields: [subSubServiceId], references: [id], onDelete: Cascade)
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+}
