@@ -196,62 +196,32 @@ export default function Footer() {
             {/* Services Grid */}
             <div className="lg:col-span-3">
               {!loading && services.length > 0 && (
-                <>
-                  <div className="grid md:grid-cols-3 gap-8">
-                    {services.slice(0, 3).map((category) => (
-                      <div key={category.id}>
-                        <Link href={category.href}>
-                          <h4 className="font-bold text-[#706152] mb-4 pb-2 border-b border-[#B7AB96]/30 hover:text-[#B7AB96] transition-colors duration-200 cursor-pointer">
-                            {category.title}
-                          </h4>
-                        </Link>
-                        {category.subServices && category.subServices.length > 0 && (
-                          <ul className="space-y-3">
-                            {category.subServices.map((service) => (
-                                <li key={service.id}>
-                                  <Link
-                                    href={`/pakalpojumi/${category.title.toLowerCase().replace(/ /g, '-')}#${service.title.toLowerCase().replace(/ /g, '-')}`}
-                                    className="text-[#706152] hover:text-[#B7AB96] transition-colors duration-200 text-sm leading-relaxed block ml-2"
-                                  >
-                                    {service.title}
-                                  </Link>
-                                </li>
-                              ))}
-                          </ul>
-                        )}
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Second Row */}
-                  {services.length > 3 && (
-                    <div className="grid md:grid-cols-3 gap-8 mt-12">
-                      {services.slice(3).map((category) => (
-                        <div key={category.id}>
-                          <Link href={category.href}>
-                            <h4 className="font-bold text-[#706152] mb-4 pb-2 border-b border-[#B7AB96]/30 hover:text-[#B7AB96] transition-colors duration-200 cursor-pointer">
-                              {category.title}
-                            </h4>
-                          </Link>
-                          {category.subServices && category.subServices.length > 0 && (
-                            <ul className="space-y-3">
-                              {category.subServices.map((service) => (
-                                  <li key={service.id}>
-                                    <Link
-                                      href={`/pakalpojumi/${category.title.toLowerCase().replace(/ /g, '-')}#${service.title.toLowerCase().replace(/ /g, '-')}`}
-                                      className="text-[#706152] hover:text-[#B7AB96] transition-colors duration-200 text-sm leading-relaxed block"
-                                    >
-                                      {service.title}
-                                    </Link>
-                                  </li>
-                                ))}
-                            </ul>
-                          )}
+                <div className="grid md:grid-cols-3 gap-x-8 gap-y-12">
+                  {services.map((category) => (
+                    <div key={category.id}>
+                      <Link href={category.href}>
+                        <h4 className="font-bold text-[#706152] mb-4 pb-2 border-b border-[#B7AB96]/30 hover:text-[#B7AB96] transition-colors duration-200 cursor-pointer">
+                          {category.title}
+                        </h4>
+                      </Link>
+                      {category.subServices && category.subServices.length > 0 && (
+                        <div className="space-y-3">
+                          {category.subServices.map((service) => (
+                            <div key={service.id} className="flex items-start gap-3">
+                              <div className="w-2 h-2 bg-gradient-to-br from-[#B7AB96] to-[#706152] rounded-full mt-2 flex-shrink-0"></div>
+                              <Link
+                                href={`/pakalpojumi/${category.title.toLowerCase().replace(/ /g, '-')}#${service.title.toLowerCase().replace(/ /g, '-')}`}
+                                className="text-[#706152] hover:text-[#B7AB96] transition-colors duration-200 text-sm leading-relaxed"
+                              >
+                                {service.title}
+                              </Link>
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      )}
                     </div>
-                  )}
-                </>
+                  ))}
+                </div>
               )}
             </div>
 

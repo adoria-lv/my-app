@@ -2,12 +2,12 @@
 
 import { useState, useEffect } from 'react'
 import { clsx } from 'clsx'
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  CheckCircle, 
-  User, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  CheckCircle,
+  User,
   Calendar,
   MessageCircle,
   ArrowRight,
@@ -268,7 +268,7 @@ export default function Contact() {
         {/* Mobile-optimized Contact Cards */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
           {/* Phone Card - Mobile optimized */}
-          <div className="relative group bg-gradient-to-br from-[#B7AB96] via-[#a59885] to-[#706152] rounded-lg md:rounded-xl p-3 md:p-4 text-white overflow-hidden md:hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
+          <div className="relative group bg-gradient-to-br from-[#B7AB96] via-[#a59885] to-[#706152] rounded-lg md:rounded-xl p-3 md:p-4 text-white md:hover:scale-105 transition-all duration-300 shadow-md hover:shadow-lg">
             <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             <div className="relative z-10 text-center">
               <div className="w-10 h-10 md:w-12 md:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center mb-2 md:mb-3 mx-auto group-hover:scale-110 transition-all duration-300">
@@ -302,9 +302,9 @@ export default function Contact() {
             </div>
           </div>
         </div>
-  
+
         {/* Mobile-optimized Main content block */}
-        <div className="bg-white/90 backdrop-blur-xl rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg shadow-[#B7AB96]/10 border border-gray-200/50 hover:shadow-xl hover:shadow-[#B7AB96]/15 transition-all duration-500 relative overflow-hidden">
+        <div className="bg-white/90 backdrop-blur-xl rounded-xl md:rounded-2xl p-4 md:p-6 shadow-lg shadow-[#B7AB96]/10 border border-gray-200/50 hover:shadow-xl hover:shadow-[#B7AB96]/15 transition-all duration-500 relative max-w-full">
           
           {/* Mobile: Single column, Desktop: Grid layout */}
           <div className="space-y-6 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-8 lg:items-start relative">
@@ -475,7 +475,7 @@ export default function Contact() {
                         value={formData.email}
                         onChange={handleInputChange}
                         placeholder="E-pasta adrese"
-                        className={`w-full p-4 sm:p-5 border-2 rounded-2xl bg-white/50 backdrop-blur-sm focus:ring-4 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-12 sm:pl-14 hover:bg-white group-hover:shadow-lg font-medium text-base min-h-[44px] autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152] ${
+                        className={`w-full p-3 md:p-4 border-2 rounded-xl bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-10 md:pl-12 hover:bg-white font-medium text-sm md:text-base min-h-[40px] autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152] ${
                           errors.email
                             ? 'border-red-300 focus:border-red-400 hover:border-red-400'
                             : 'border-gray-200/50 focus:border-[#B7AB96] hover:border-[#B7AB96]/50'
@@ -499,7 +499,7 @@ export default function Contact() {
                       onChange={handleInputChange}
                       placeholder="Jūsu komentārs"
                       rows={4}
-                      className="w-full p-4 sm:p-5 border-2 border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-sm focus:border-[#B7AB96] focus:ring-4 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-12 sm:pl-14 resize-none hover:bg-white hover:border-[#B7AB96]/50 group-hover:shadow-lg font-medium text-base autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152]"
+                      className="w-full p-3 md:p-4 border-2 border-gray-200/50 rounded-xl bg-white/50 backdrop-blur-sm focus:border-[#B7AB96] focus:ring-2 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-10 md:pl-12 resize-none hover:bg-white hover:border-[#B7AB96]/50 font-medium text-sm md:text-base autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152]"
                       suppressHydrationWarning
                     />
                     <MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-[#706152] absolute left-3 md:left-4 top-4 md:top-5 group-hover:text-[#B7AB96] transition-colors duration-300" />
@@ -508,11 +508,11 @@ export default function Contact() {
                   {/* Mobile-optimized Submit Button */}
                   <button
                     type="submit"
-                    disabled={!isFormValid || isSubmitting}
+                    disabled={isSubmitting}
                     className={clsx(
                       "group relative w-full inline-flex items-center justify-center gap-2 md:gap-3 px-4 py-3 md:px-6 md:py-4 rounded-lg md:rounded-xl font-bold text-sm md:text-base shadow-lg transition-all duration-300 transform overflow-hidden min-h-[40px] bg-gradient-to-r from-[#B7AB96] via-[#a59885] to-[#706152] text-white",
-                      !isFormValid || isSubmitting
-                        ? "cursor-not-allowed"
+                      isSubmitting
+                        ? "cursor-not-allowed opacity-70"
                         : "hover:shadow-xl hover:shadow-[#B7AB96]/20 md:hover:-translate-y-1 md:hover:scale-105"
                     )}
                   >
@@ -535,10 +535,10 @@ export default function Contact() {
           </div>
   
           {/* Mobile-optimized Decorative elements */}
-          <div className="absolute -top-3 -right-3 sm:-top-6 sm:-right-6 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-[#B7AB96]/15 to-[#706152]/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700" />
-          <div className="absolute -bottom-3 -left-3 sm:-bottom-6 sm:-left-6 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-tl from-[#706152]/15 to-[#B7AB96]/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700" />
-          <div className="absolute top-1/4 -left-2 sm:-left-4 w-12 h-12 sm:w-16 sm:h-16 bg-[#B7AB96]/10 rounded-full blur-xl" />
-          <div className="absolute bottom-1/4 -right-2 sm:-right-4 w-14 h-14 sm:w-20 sm:h-20 bg-[#706152]/10 rounded-full blur-xl" />
+          <div className="absolute top-0 right-0 w-20 h-20 sm:w-32 sm:h-32 bg-gradient-to-br from-[#B7AB96]/15 to-[#706152]/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700" />
+          <div className="absolute bottom-0 left-0 w-24 h-24 sm:w-40 sm:h-40 bg-gradient-to-tl from-[#706152]/15 to-[#B7AB96]/10 rounded-full blur-2xl group-hover:scale-125 transition-transform duration-700" />
+          <div className="absolute top-1/4 left-0 w-12 h-12 sm:w-16 sm:h-16 bg-[#B7AB96]/10 rounded-full blur-xl" />
+          <div className="absolute bottom-1/4 right-0 w-14 h-14 sm:w-20 sm:h-20 bg-[#706152]/10 rounded-full blur-xl" />
         </div>
       </div>
     </section>

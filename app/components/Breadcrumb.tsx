@@ -26,12 +26,12 @@ export default function Breadcrumb({ items, className = '' }: BreadcrumbProps) {
 
       {items.map((item, index) => (
         <div key={index} className="flex items-center space-x-1">
-          <ChevronRight className="w-4 h-4 text-gray-400" />
+          <ChevronRight className="w-4 h-4 text-gray-500" />
           
           {item.href && index < items.length - 1 ? (
             <Link
               href={item.href}
-              className="px-2 py-1 rounded-lg text-gray-600 hover:text-[#B7AB96] hover:bg-[#B7AB96]/5 transition-all duration-200 font-medium"
+              className="px-2 py-1 rounded-lg text-gray-500 hover:text-[#B7AB96] hover:bg-[#B7AB96]/5 transition-all duration-200 font-medium"
             >
               {item.label}
             </Link>

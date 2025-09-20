@@ -257,9 +257,9 @@ export default function Testimonials() {
 
 
                   {/* Gradient border effect */}
-                  <div className="absolute inset-0 rounded-[32px] opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <div className="absolute inset-0 bg-gradient-to-br from-[#B7AB96]/20 via-transparent to-[#706152]/20 rounded-[32px]" />
-                    <div className="absolute inset-[1px] bg-white rounded-[31px]" />
+                  <div className="absolute inset-0 rounded-xl md:rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                    <div className="absolute inset-0 bg-gradient-to-br from-[#B7AB96]/20 via-transparent to-[#706152]/20 rounded-xl md:rounded-2xl" />
+                    <div className="absolute inset-[1px] bg-white rounded-lg md:rounded-xl" />
                   </div>
 
                   {/* Hover glow effect */}
@@ -292,8 +292,8 @@ export default function Testimonials() {
                     }}
                     className={clsx(
                       "w-3 h-3 rounded-full transition-all duration-200",
-                      index === currentSlide 
-                        ? "bg-[#B7AB96] scale-125" 
+                      index === currentSlide
+                        ? "bg-[#B7AB96] scale-125"
                         : "bg-gray-300 hover:bg-gray-400"
                     )}
                     aria-label={`Iet uz ${index + 1}. atsauksmju grupu`}

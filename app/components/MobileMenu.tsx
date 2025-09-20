@@ -1,8 +1,7 @@
-// components/ui/MobileMenu.tsx
 'use client'
 
 import { useState, useRef, useEffect } from 'react'
-import { ChevronDown, X, Phone, MapPin, Clock, ChevronRight } from 'lucide-react'
+import { ChevronDown, X, Phone, MapPin, Clock } from 'lucide-react'
 import { clsx } from 'clsx'
 import Link from 'next/link'
 import Image from 'next/image'
@@ -85,7 +84,7 @@ export default function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
 
   return (
     // SOLID WHITE BACKGROUND - NO TRANSPARENCY
-    <div className="lg:hidden fixed inset-0 z-50 bg-white flex flex-col overflow-y-auto scrollbar-thin">
+    <div className="lg:hidden fixed inset-0 z-50 bg-white flex flex-col overflow-y-auto overflow-x-hidden scrollbar-thin max-w-full">
       {/* Header with Logo and Close */}
       <div className="flex items-center justify-between px-6 py-4 bg-white border-b border-gray-200/50">
         {/* Logo */}

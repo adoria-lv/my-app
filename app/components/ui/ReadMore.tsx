@@ -57,7 +57,7 @@ export default function ReadMoreFade({
           {children}
         </div>
         {!isExpanded && (
-          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/95 via-white/90 to-transparent pointer-events-none transition-opacity duration-200 z-10" />
+          <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-white via-white/90 to-transparent pointer-events-none transition-opacity duration-200 z-10" />
         )}
       </div>
 

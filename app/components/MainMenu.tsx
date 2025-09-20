@@ -216,7 +216,7 @@ export default function MainMenu() {
             <div
               key={item.label}
               className={clsx(
-                "absolute left-0 right-0 top-full bg-white border-t-2 border-[#B7AB96] shadow-lg transition-all duration-200 ease-in-out z-10 max-w-none",
+                "absolute w-full top-full bg-white border-t-2 border-[#B7AB96] shadow-lg transition-all duration-200 ease-in-out z-10",
                 activeDropdown === item.label
                   ? "opacity-100 visible translate-y-0"
                   : "opacity-0 invisible -translate-y-2"

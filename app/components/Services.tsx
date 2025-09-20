@@ -146,10 +146,10 @@ export default function ServicesAlternative() {
                   : "opacity-0 translate-y-12"
               )}
             >
-              <div className="relative overflow-hidden bg-gradient-to-br from-white via-gray-50/30 to-white rounded-[12px] md:rounded-[20px] p-3 md:p-6 hover:shadow-xl hover:shadow-[#B7AB96]/10 transition-all duration-500 md:hover:-translate-y-1 border border-gray-100/50 group-hover:border-[#B7AB96]/20">
+              <div className="relative bg-gradient-to-br from-white via-gray-50/30 to-white rounded-[12px] md:rounded-[20px] p-3 md:p-6 hover:shadow-xl hover:shadow-[#B7AB96]/10 transition-all duration-500 md:hover:-translate-y-1 border border-gray-100/50 group-hover:border-[#B7AB96]/20">
 
-                <div className="absolute -top-6 -right-6 md:-top-10 md:-right-10 w-16 h-16 md:w-24 md:h-24 bg-[#B7AB96]/5 rounded-full blur-2xl group-hover:bg-[#B7AB96]/10 transition-all duration-500"></div>
-                <div className="absolute -bottom-4 -left-4 md:-bottom-8 md:-left-8 w-12 h-12 md:w-20 md:h-20 bg-[#706152]/5 rounded-full blur-xl group-hover:bg-[#706152]/8 transition-all duration-500"></div>
+                <div className="absolute top-0 right-0 w-16 h-16 md:w-24 md:h-24 bg-[#B7AB96]/5 rounded-full blur-2xl group-hover:bg-[#B7AB96]/10 transition-all duration-500"></div>
+                <div className="absolute bottom-0 left-0 w-12 h-12 md:w-20 md:h-20 bg-[#706152]/5 rounded-full blur-xl group-hover:bg-[#706152]/8 transition-all duration-500"></div>
                 
                 <div className="relative mb-2 md:mb-4 flex justify-start">
                   <div className="relative w-10 h-10 md:w-16 md:h-16 bg-gradient-to-br from-[#B7AB96] to-[#9d9583] rounded-lg md:rounded-2xl flex items-center justify-center group-hover:scale-110 md:group-hover:rotate-12 transition-all duration-500 shadow-lg shadow-[#B7AB96]/20 group-hover:shadow-xl group-hover:shadow-[#B7AB96]/30">
@@ -181,7 +181,7 @@ export default function ServicesAlternative() {
                   </div>
                 </div>
 
-                <div className="absolute top-0 right-0 w-8 h-8 md:w-16 md:h-16 bg-gradient-to-bl from-[#B7AB96]/10 to-transparent rounded-bl-xl md:rounded-bl-3xl rounded-tr-[16px] md:rounded-tr-[28px]"></div>
+                <div className="absolute top-0 right-0 w-8 h-8 md:w-16 md:h-16 bg-gradient-to-bl from-[#B7AB96]/10 to-transparent rounded-bl-xl md:rounded-bl-3xl rounded-tr-[12px] md:rounded-tr-[20px]"></div>
               </div>
             </Link>
           ))}

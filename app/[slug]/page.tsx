@@ -1,3 +1,4 @@
+// Modificētā service detail page
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -44,6 +45,8 @@ export default function ServiceDetailPage() {
 
   useEffect(() => {
     if (slug) {
+      // Scroll to top when page loads or parameters change
+      window.scrollTo(0, 0)
       fetchService()
     }
   }, [slug])
@@ -89,13 +92,12 @@ export default function ServiceDetailPage() {
     return notFound()
   }
 
-
   const breadcrumbItems = [
     { label: service.title }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/50">
+    <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/50 overflow-x-hidden max-w-full">
       {/* Header Section */}
       <div
           className={`p-6 sm:p-8 lg:p-20 shadow-md shadow-[#B7AB96]/10 relative overflow-hidden mb-6 md:mb-8 h-[500px] ${
@@ -188,9 +190,12 @@ export default function ServiceDetailPage() {
         </div>
 
       <div className="max-w-[1250px] mx-auto px-4 py-6 md:py-8">
-        {/* Content Section */}
+        {/* Content Section with ID for scrolling */}
         {service.content && (
-          <div className="sm:bg-white sm:rounded-xl md:sm:rounded-2xl sm:shadow-md p-0 sm:p-6 md:sm:p-8 lg:sm:p-10 mb-8 md:mb-10">
+          <div 
+            id="service-content" 
+            className="sm:bg-white sm:rounded-xl md:sm:rounded-2xl sm:shadow-md p-0 sm:p-6 md:sm:p-8 lg:sm:p-10 mb-8 md:mb-10"
+          >
             <div className="prose prose-lg max-w-none">
               <div className="text-[#706152] leading-relaxed">
                 {parseServiceContentWithReadMore(service.content)}

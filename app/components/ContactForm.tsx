@@ -169,7 +169,7 @@ export default function ContactForm({ preselectedService, disableServiceSelectio
       setIsSubmitted(true)
 
       setFormData({
-        service: '',
+        service: preselectedService || '',
         name: '',
         email: '',
         phone: '',
@@ -216,53 +216,56 @@ export default function ContactForm({ preselectedService, disableServiceSelectio
               </p>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-3 md:space-y-4" noValidate suppressHydrationWarning>
-              <div className="relative group">
-                {disableServiceSelection && preselectedService ? (
-                  <>
-                    <input
-                      type="text"
-                      name="service"
-                      value={preselectedService}
-                      disabled
-                      className="w-full p-3 md:p-4 border-2 rounded-xl bg-gradient-to-br from-[#B7AB96]/10 via-[#a59885]/5 to-[#706152]/10 backdrop-blur-sm text-[#706152] outline-none font-medium text-sm md:text-base min-h-[40px] border-[#B7AB96]/30 cursor-not-allowed shadow-inner flex items-center"
-                    />
-                    <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none flex items-center">
-                      <svg width="20" height="20" fill="currentColor" className="text-[#B7AB96]">
-                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
-                      </svg>
+            <form onSubmit={handleSubmit} className="space-y-1 md:space-y-1" noValidate suppressHydrationWarning>
+              <div className="space-y-1">
+                <div className="relative group">
+                  {(disableServiceSelection && preselectedService) || (preselectedService && formData.service) ? (
+                    <div className="w-full p-3 md:p-4 border-2 border-gray-200/50 rounded-xl bg-gray-50/50 backdrop-blur-sm text-[#706152] font-medium text-sm md:text-base min-h-[40px] flex items-center gap-3 cursor-not-allowed opacity-75">
+                      <Calendar className="w-4 h-4 md:w-5 md:h-5 text-[#B7AB96] flex-shrink-0" />
+                      <span>{preselectedService || formData.service}</span>
+                      <div className="ml-auto bg-[#B7AB96]/20 text-[#706152] text-xs px-2 py-1 rounded-full font-medium">
+                        Izvēlēts
+                      </div>
+                      <input
+                        type="hidden"
+                        name="service"
+                        value={preselectedService || formData.service}
+                      />
                     </div>
-                  </>
-                ) : (
-                  <>
-                    <select
-                      name="service"
-                      value={formData.service}
-                      onChange={handleInputChange}
-                      className={`w-full p-3 md:p-4 border-2 rounded-xl bg-white/50 backdrop-blur-sm text-[#706152] focus:ring-2 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 appearance-none pr-10 hover:bg-white font-medium text-sm md:text-base min-h-[40px] ${
-                        errors.service
-                          ? 'border-red-300 focus:border-red-400 hover:border-red-400'
-                          : 'border-gray-200/50 focus:border-[#B7AB96] hover:border-[#B7AB96]/50'
-                      }`}
-                      suppressHydrationWarning
-                    >
-                      <option value="" disabled hidden>
-                        Izvēlieties pakalpojumu
-                      </option>
-                      {services.map((service) => (
-                        <option key={service.id} value={service.name}>{service.name}</option>
-                      ))}
-                    </select>
-                    <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none group-hover:text-[#B7AB96] transition-colors duration-300">
-                      <svg width="20" height="20" fill="currentColor" className="text-[#706152]">
-                        <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
-                      </svg>
-                    </div>
-                  </>
-                )}
-                {errors.service && (
-                  <p className="mt-1 text-sm text-red-500">{errors.service}</p>
-                )}
+                  ) : (
+                    <>
+                      <select
+                        name="service"
+                        value={formData.service}
+                        onChange={handleInputChange}
+                        className={`w-full p-3 md:p-4 border-2 rounded-xl bg-white/50 backdrop-blur-sm text-[#706152] focus:ring-2 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 appearance-none pr-10 hover:bg-white font-medium text-sm md:text-base min-h-[40px] ${
+                          errors.service
+                            ? 'border-red-300 focus:border-red-400 hover:border-red-400'
+                            : 'border-gray-200/50 focus:border-[#B7AB96] hover:border-[#B7AB96]/50'
+                        }`}
+                        suppressHydrationWarning
+                      >
+                        <option value="" disabled hidden>
+                          Izvēlieties pakalpojumu
+                        </option>
+                        {services.map((service) => (
+                          <option key={service.id} value={service.name}>{service.name}</option>
+                        ))}
+                      </select>
+                      <div className="absolute right-3 md:right-4 top-1/2 -translate-y-1/2 pointer-events-none group-hover:text-[#B7AB96] transition-colors duration-300">
+                        <svg width="20" height="20" fill="currentColor" className="text-[#706152]">
+                          <path d="M6 8l4 4 4-4" stroke="currentColor" strokeWidth="2" fill="none"/>
+                        </svg>
+                      </div>
+                    </>
+                  )}
+                </div>
+                {/* Error message container with consistent height */}
+                <div className="min-h-[20px]">
+                  {errors.service && !preselectedService && (
+                    <p className="text-sm text-red-500">{errors.service}</p>
+                  )}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 md:gap-4">
@@ -323,7 +326,7 @@ export default function ContactForm({ preselectedService, disableServiceSelectio
                     value={formData.email}
                     onChange={handleInputChange}
                     placeholder="E-pasta adrese"
-                    className={`w-full p-4 sm:p-5 border-2 rounded-2xl bg-white/50 backdrop-blur-sm focus:ring-4 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-12 sm:pl-14 hover:bg-white group-hover:shadow-lg font-medium text-base min-h-[44px] autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152] ${
+                    className={`w-full p-3 md:p-4 border-2 rounded-xl bg-white/50 backdrop-blur-sm focus:ring-2 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-10 md:pl-12 hover:bg-white font-medium text-sm md:text-base min-h-[40px] autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152] ${
                       errors.email
                         ? 'border-red-300 focus:border-red-400 hover:border-red-400'
                         : 'border-gray-200/50 focus:border-[#B7AB96] hover:border-[#B7AB96]/50'
@@ -346,7 +349,7 @@ export default function ContactForm({ preselectedService, disableServiceSelectio
                   onChange={handleInputChange}
                   placeholder="Jūsu komentārs"
                   rows={4}
-                  className="w-full p-4 sm:p-4 border-2 border-gray-200/50 rounded-2xl bg-white/50 backdrop-blur-sm focus:border-[#B7AB96] focus:ring-4 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-12 sm:pl-14 resize-none hover:bg-white hover:border-[#B7AB96]/50 group-hover:shadow-lg font-medium text-base autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152]"
+                  className="w-full p-3 md:p-4 border-2 border-gray-200/50 rounded-xl bg-white/50 backdrop-blur-sm focus:border-[#B7AB96] focus:ring-2 focus:ring-[#B7AB96]/10 outline-none transition-all duration-300 pl-10 md:pl-12 resize-none hover:bg-white hover:border-[#B7AB96]/50 font-medium text-sm md:text-base autofill:shadow-[inset_0_0_0px_1000px_rgb(255,255,255)] autofill:text-[#706152]"
                   suppressHydrationWarning
                 />
                 <MessageCircle className="w-4 h-4 md:w-5 md:h-5 text-[#706152] absolute left-3 md:left-4 top-4 md:top-5 group-hover:text-[#B7AB96] transition-colors duration-300" />
@@ -354,11 +357,11 @@ export default function ContactForm({ preselectedService, disableServiceSelectio
 
               <button
                 type="submit"
-                disabled={!isFormValid || isSubmitting}
+                disabled={isSubmitting}
                 className={clsx(
                   "group relative w-full inline-flex items-center justify-center gap-2 md:gap-3 px-4 py-3 md:px-6 md:py-4 rounded-lg md:rounded-xl font-bold text-sm md:text-base shadow-lg transition-all duration-300 transform overflow-hidden min-h-[40px] bg-gradient-to-r from-[#B7AB96] via-[#a59885] to-[#706152] text-white",
-                  !isFormValid || isSubmitting
-                    ? "cursor-not-allowed"
+                  isSubmitting
+                    ? "cursor-not-allowed opacity-70"
                     : "hover:shadow-xl hover:shadow-[#B7AB96]/20 md:hover:-translate-y-1 md:hover:scale-105"
                 )}
               >

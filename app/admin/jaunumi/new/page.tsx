@@ -5,7 +5,6 @@ import { useRouter } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { ArrowLeft, Save, Eye } from 'lucide-react'
 import Link from 'next/link'
-import QuillEditor from '@/components/QuillEditor'
 import S3Upload from '../../../components/ui/S3Upload'
 
 export default function NewJaunumuPost() {
@@ -151,14 +150,13 @@ export default function NewJaunumuPost() {
               <label className="block text-sm font-medium text-[#706152] mb-4">
                 Saturs *
               </label>
-              <div className="border border-[#B7AB96]/30 rounded-md overflow-hidden">
-                <QuillEditor
-                  key="new-post"
-                  value={formData.content}
-                  onChange={(content) => setFormData(prev => ({ ...prev, content }))}
-                  placeholder="Sāciet rakstīt blog saturu..."
-                />
-              </div>
+              <textarea
+                value={formData.content}
+                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
+                placeholder="Sāciet rakstīt blog saturu..."
+                className="w-full p-3 border border-[#B7AB96]/30 rounded-md focus:ring-[#B7AB96] focus:border-[#B7AB96] min-h-[400px]"
+                rows={15}
+              />
             </div>
           </div>
 

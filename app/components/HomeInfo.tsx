@@ -189,7 +189,7 @@ export default function HomeInfo() {
             </p>
             <Link
               href="/contact"
-              className="group relative inline-flex items-center gap-2 md:gap-3 px-4 py-3 md:px-6 md:py-4 bg-gradient-to-r from-[#B7AB96] via-[#a59885] to-[#706152] text-white rounded-lg md:rounded-xl font-bold text-sm md:text-base shadow-lg hover:shadow-xl hover:shadow-[#B7AB96]/20 transition-all duration-300 transform md:hover:-translate-y-1 md:hover:scale-105 overflow-hidden min-h-[40px]"
+              className="group relative inline-flex items-center gap-2 md:gap-3 px-4 py-3 md:px-6 md:py-4 bg-gradient-to-r from-[#B7AB96] via-[#a59885] to-[#706152] text-white rounded-lg md:rounded-xl font-bold text-sm md:text-base shadow-lg hover:shadow-xl hover:shadow-[#B7AB96]/20 transition-all duration-300 transform md:hover:-translate-y-1 md:hover:scale-105 min-h-[40px]"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               <span className="relative z-10">Uzzināt vairāk</span>

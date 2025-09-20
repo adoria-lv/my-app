@@ -129,52 +129,51 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
         {children}
       </DialogTrigger>
       <DialogContent
-        className="sm:max-w-[750px] max-h-[85vh] sm:max-h-[90vh] overflow-hidden bg-white/98 backdrop-blur-xl border-2 border-gray-200/50 shadow-2xl shadow-[#B7AB96]/20 sm:rounded-3xl rounded-2xl max-w-[calc(100%-1rem)]"
+        className="w-full !max-w-[800px] max-h-[90vh] bg-white/98 backdrop-blur-xl border-2 border-gray-200/50 shadow-2xl shadow-[#B7AB96]/20 sm:rounded-3xl rounded-2xl overflow-hidden flex flex-col"
         showCloseButton={false}
       >
-        {/* Custom Close Button (now inside DialogContent, top-left) */}
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute top-4 left-4 z-50 w-10 h-10 rounded-full bg-[#B7AB96]/10 hover:bg-[#B7AB96]/20 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg"
-        >
-          <X className="w-6 h-6 text-[#706152]" />
-        </button>
-
-        <div className="dialog-scroll overflow-y-auto px-6 max-h-[80vh]">
-
-        <DialogHeader className="pb-6 relative overflow-hidden">
+        {/* DialogHeader with custom close button and new structure */}
+        <DialogHeader className="flex-shrink-0 text-center px-2 sm:px-6 pb-6 relative overflow-hidden">
           {/* Background decorative elements */}
-          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#B7AB96]/8 to-transparent rounded-full blur-2xl"></div>
-          <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-tr from-[#706152]/8 to-transparent rounded-full blur-xl"></div>
-          
-          <DialogTitle className="text-center relative z-10">
-            <div className="flex items-center justify-center gap-4 mb-3">
-              <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#B7AB96] via-[#a59885] to-[#706152] rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300">
-                <Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
-              </div>
+          <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#B7AB96]/8 to-transparent rounded-full blur-2xl z-0"></div>
+          <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-gradient-to-tr from-[#706152]/8 to-transparent rounded-full blur-xl z-0"></div>
+          {/* Custom Close Button (top-right) */}
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-4 right-4 z-20 w-10 h-10 rounded-full bg-[#B7AB96]/10 hover:bg-[#B7AB96]/20 flex items-center justify-center transition-all duration-200 hover:scale-110 shadow-lg focus:outline-none focus:ring-0"
+            aria-label="Aizvērt"
+            type="button"
+          >
+            <X className="w-6 h-6 text-[#706152]" />
+          </button>
+          {/* Calendar icon centered */}
+          <div className="mx-auto mb-2 flex items-center justify-center relative z-10">
+            <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-[#B7AB96] via-[#a59885] to-[#706152] rounded-2xl sm:rounded-3xl flex items-center justify-center shadow-lg hover:scale-105 transition-transform duration-300">
+              <Calendar className="w-6 h-6 sm:w-7 sm:h-7 text-white" />
             </div>
-            <div className="text-3xl sm:text-4xl font-bold text-[#706152] mb-2">Pieteikt vizīti</div>
-            <div className="text-lg sm:text-xl font-semibold text-[#B7AB96]">Veselības centrs Adoria</div>
+          </div>
+          {/* Title and subtitle centered */}
+          <DialogTitle className="relative z-10 text-3xl sm:text-4xl font-bold text-[#706152] mb-1 text-center">
+            Pieteikt vizīti
           </DialogTitle>
+          <div className="relative z-10 text-lg sm:text-xl font-semibold text-[#B7AB96] text-center">
+            Veselības centrs Adoria
+          </div>
         </DialogHeader>
 
-        {/* Separator Line */}
-        <div className="border-t border-gradient-to-r from-[#B7AB96]/30 via-[#B7AB96]/20 to-[#B7AB96]/30 mb-6"></div>
+        <div className="flex-1 overflow-y-auto px-3 sm:px-6">
+          {/* Separator Line */}
+          <div className="border-t border-gradient-to-r from-[#B7AB96]/30 via-[#B7AB96]/20 to-[#B7AB96]/30 mb-6"></div>
 
-        {/* Form Instruction */}
-        <div className="text-center mb-8">
-          <p className="text-[#706152]/80 text-base sm:text-lg leading-relaxed">
-            Aizpildiet pieteikuma formu<br/>un mēs ar jums sazināsimies <span className="text-[#B7AB96] font-semibold">tuvākajā</span> laikā,
-            lai apstiprinātu vizītes laiku.
-          </p>
-          <p className="mt-2">
-            <small className="text-red-500">
-              Pirms došanās pie speciālista sagaidiet apstiprinājuma zvanu vai e-pastu no administrācijas.
-            </small>
-          </p>
-        </div>
+          {/* Form Instruction */}
+          <div className="text-left mb-8">
+            <p className="relative z-10 text-[#706152]/80 text-base sm:text-lg leading-relaxed">
+              Aizpildiet pieteikuma formu un mēs ar jums sazināsimies <span className="text-[#B7AB96] font-semibold">tuvākajā</span> laikā,
+              lai apstiprinātu vizītes laiku.
+            </p>
+          </div>
 
-        <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 py-6 sm:py-8">
+          <form onSubmit={handleSubmit} className="space-y-6 sm:space-y-8 py-6 sm:py-8 w-full overflow-hidden">
           {/* Personal Information */}
           <div className="space-y-4 sm:space-y-6 relative">
             {/* Decorative line */}
@@ -246,7 +245,7 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
               Vizītes informācija
             </h3>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 w-full">
               <div className="space-y-1.5 sm:space-y-2">
                 <Label htmlFor="service" className="text-sm font-medium text-[#706152]">
                   Pakalpojums *
@@ -264,6 +263,8 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+
               <div className="space-y-1.5 sm:space-y-2">
                 <Label htmlFor="time" className="text-sm font-medium text-[#706152]">
                   Vēlamais laiks *
@@ -282,41 +283,19 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
                 </Select>
               </div>
 
-            </div>
-
             <div className="space-y-1.5 sm:space-y-2">
                 <Label htmlFor="date" className="text-sm font-medium text-[#706152]">
                   Vēlamais datums *
                 </Label>
-                <div className="relative max-w-[200px] sm:max-w-[305px]">
-                  <Input
-                    id="date"
-                    type="date"
-                    value={formData.date}
-                    onChange={(e) => handleInputChange('date', e.target.value)}
-                    onClick={(e) => e.currentTarget.showPicker()}
-                    min={new Date().toISOString().split('T')[0]}
-                    className="border border-[#B7AB96]/30 focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none h-7 sm:h-10 rounded-lg sm:rounded-xl focus:border-[#B7AB96] transition-all duration-300 bg-[#B7AB96]/5 focus:bg-white hover:bg-white shadow-sm hover:shadow-md text-transparent pr-10 text-sm sm:text-base autofill:shadow-[inset_0_0_0px_1000px_rgb(249,248,246)] [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-datetime-edit]:hidden [&::-webkit-datetime-edit-fields-wrapper]:hidden [&::-webkit-datetime-edit-text]:hidden [&::-webkit-datetime-edit-month-field]:hidden [&::-webkit-datetime-edit-day-field]:hidden [&::-webkit-datetime-edit-year-field]:hidden"
-                    required
-                  />
-
-                  <div className="absolute left-3 top-1/2 -translate-y-1/2 text-[#706152] pointer-events-none z-10">
-                    {formData.date ?
-                      new Date(formData.date + 'T00:00:00').toLocaleDateString('en-GB') :
-                      <span className="text-[#706152]/60 text-sm">Izvēlēties datumu</span>
-                    }
-                  </div>
-
-                  <div
-                    className="absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer z-10"
-                    onClick={(e) => {
-                      const input = document.getElementById('date') as HTMLInputElement;
-                      input?.showPicker();
-                    }}
-                  >
-                    <Calendar className="w-4 h-4 text-[#B7AB96] hover:text-[#706152] transition-colors" />
-                  </div>
-                </div>
+                <Input
+                  id="date"
+                  type="date"
+                  value={formData.date}
+                  onChange={(e) => handleInputChange('date', e.target.value)}
+                  min={new Date().toISOString().split('T')[0]}
+                  className="border border-[#B7AB96]/30 focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none h-10 sm:h-12 rounded-lg sm:rounded-xl focus:border-[#B7AB96] transition-all duration-300 bg-[#B7AB96]/5 focus:bg-white hover:bg-white shadow-sm hover:shadow-md text-sm sm:text-base autofill:shadow-[inset_0_0_0px_1000px_rgb(249,248,246)] autofill:text-[#706152]"
+                  required
+                />
               </div>
                   
             <div className="space-y-1.5 sm:space-y-2">
@@ -346,7 +325,10 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
                     <input
                       type="checkbox"
                       checked={formData.contactPreferences.phone}
-                      onChange={(e) => handleContactPreferenceChange('phone', e.target.checked)}
+                      onChange={() => setFormData(prev => ({
+                        ...prev,
+                        contactPreferences: { phone: true, email: false }
+                      }))}
                       className="sr-only"
                     />
                     <div className={`w-5 h-5 border-2 rounded-md transition-all duration-200 flex items-center justify-center ${
@@ -372,7 +354,10 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
                     <input
                       type="checkbox"
                       checked={formData.contactPreferences.email}
-                      onChange={(e) => handleContactPreferenceChange('email', e.target.checked)}
+                      onChange={() => setFormData(prev => ({
+                        ...prev,
+                        contactPreferences: { phone: false, email: true }
+                      }))}
                       className="sr-only"
                     />
                     <div className={`w-5 h-5 border-2 rounded-md transition-all duration-200 flex items-center justify-center ${
@@ -428,7 +413,12 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
             </div>
           )}
 
-          {/* Submit Button */}
+            <p className="relative z-10">
+              <small className="text-red-700">
+                * Pirms došanās pie speciālista sagaidiet apstiprinājuma zvanu vai e-pastu no administrācijas.
+              </small>
+            </p>
+          
           <div className="pt-6 border-t border-gradient-to-r from-[#B7AB96]/30 via-[#B7AB96]/20 to-[#B7AB96]/30 relative">
             
             <Button
@@ -441,7 +431,7 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
                   : "bg-[#B7AB96]/30 text-[#706152]/60 cursor-not-allowed"
               )}
             >
-              {/* Button gradient overlay */}
+
               <div className="absolute inset-0 bg-gradient-to-r from-white/10 via-transparent to-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
               {isSubmitting ? (
@@ -455,7 +445,7 @@ export default function AppointmentDialog({ children, defaultService }: Appointm
             </Button>
           </div>
 
-        </form>
+          </form>
         </div>
       </DialogContent>
     </Dialog>

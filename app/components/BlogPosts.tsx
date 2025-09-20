@@ -212,17 +212,17 @@ export default function JaunumuPosts() {
           {/* Mobile: Single Card Display */}
           <div className="lg:hidden">
             {/* Add padding bottom to container to give shadow space */}
-            <div className="overflow-hidden pb-8">
+            <div className="overflow-hidden pb-8 max-w-full">
               <div
-                className="flex transition-transform duration-500 ease-out"
+                className="flex transition-transform duration-500 ease-out max-w-full"
                 style={{ transform: `translateX(-${currentSlide * 100}%)` }}
               >
                 {blogPosts.map((post) => (
                   <article
                     key={post.id}
-                    className="w-full flex-shrink-0"
+                    className="w-full flex-shrink-0 max-w-full"
                   >
-                    <div className="px-3">
+                    <div className="px-3 max-w-full">
                     <Link href={`/jaunumi/${post.slug}`} className="block group">
                       {/* Add margin-bottom to give shadow breathing room */}
                       <div className="relative bg-white/90 backdrop-blur-xl rounded-xl md:rounded-2xl shadow-lg hover:shadow-xl hover:shadow-[#B7AB96]/15 transition-all duration-500 border border-gray-200/50 overflow-hidden mb-4">

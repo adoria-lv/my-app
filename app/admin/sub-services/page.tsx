@@ -6,7 +6,6 @@ import { redirect } from 'next/navigation'
 import { toast } from 'react-hot-toast'
 import { Plus, Pencil, Trash2, Save, X, Eye, EyeOff, ChevronDown, ChevronUp, HelpCircle } from 'lucide-react'
 import Link from 'next/link'
-import QuillEditor from '@/components/QuillEditor'
 import S3Upload from '@/app/components/ui/S3Upload'
 import { parseServiceContentWithReadMore } from '@/lib/contentParser'
 
@@ -169,20 +168,6 @@ export default function SubServicesAdmin() {
     setShowSubSubForm(false)
   }
 
-  // Memoized callback for QuillEditor to prevent unnecessary re-renders
-  const handleQuillChange = useCallback((content: string) => {
-    setFormData(prev => ({
-      ...prev,
-      content
-    }))
-  }, [])
-
-  const handleSubSubQuillChange = useCallback((content: string) => {
-    setSubSubFormData(prev => ({
-      ...prev,
-      content
-    }))
-  }, [])
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -539,12 +524,12 @@ export default function SubServicesAdmin() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Detalizēts saturs (HTML)
               </label>
-              <QuillEditor
-                key={`quill-${editingId || 'new'}`}
+              <textarea
                 value={formData.content}
-                onChange={handleQuillChange}
+                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
                 placeholder="Detalizēts apraksts..."
-                className="border border-[#B7AB96]/30 rounded-md focus-within:ring-[#B7AB96] focus-within:border-[#B7AB96]"
+                className="w-full p-3 border border-[#B7AB96]/30 rounded-md focus:ring-[#B7AB96] focus:border-[#B7AB96] min-h-[200px]"
+                rows={8}
               />
             </div>
 
@@ -756,12 +741,12 @@ export default function SubServicesAdmin() {
               <label className="block text-sm font-medium text-gray-700 mb-1">
                 Detalizēts saturs (HTML)
               </label>
-              <QuillEditor
-                key={`quill-sub-${editingSubSubId || 'new'}`}
+              <textarea
                 value={subSubFormData.content}
-                onChange={handleSubSubQuillChange}
+                onChange={(e) => setSubSubFormData(prev => ({ ...prev, content: e.target.value }))}
                 placeholder="Detalizēts apraksts..."
-                className="border border-[#B7AB96]/30 rounded-md focus-within:ring-[#B7AB96] focus-within:border-[#B7AB96]"
+                className="w-full p-3 border border-[#B7AB96]/30 rounded-md focus:ring-[#B7AB96] focus:border-[#B7AB96] min-h-[200px]"
+                rows={8}
               />
             </div>
 

@@ -91,7 +91,7 @@ export default function HeroSlider() {
   }
 
   return (
-    <div className="relative w-full h-[350px] md:aspect-auto md:h-[600px] lg:h-[700px] overflow-hidden bg-gradient-to-br from-gray-900 via-[#706152] to-gray-800">
+    <div className="relative w-full max-w-full h-[350px] md:aspect-auto md:h-[600px] lg:h-[700px] overflow-hidden bg-gradient-to-br from-gray-900 via-[#706152] to-gray-800">
       {/* Floating Background Elements - Responsive */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-10 left-10 md:top-20 md:left-20 w-48 h-48 md:w-96 md:h-96 bg-gradient-to-br from-[#B7AB96]/20 to-[#706152]/10 rounded-full blur-3xl" />
@@ -108,7 +108,7 @@ export default function HeroSlider() {
               index === currentSlide ? "opacity-100 scale-100" : "opacity-0 scale-105"
             )}
           >
-            <div className="absolute inset-0">
+            <div className="absolute inset-0 overflow-hidden">
               {/* Mobile Image - Load first */}
               <Image
                 src={slide.mobileImage || slide.image}
@@ -209,11 +209,12 @@ export default function HeroSlider() {
       {/* Decorative Bottom Border with Interesting Shape - Responsive */}
       <div className="absolute bottom-0 left-0 right-0 h-16 md:h-24 z-20">
         <svg
-          className="w-full h-full"
+          className="w-full h-full max-w-full"
           viewBox="0 0 1200 100"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
+          style={{ maxWidth: '100%', overflow: 'hidden' }}
         >
           {/* Gradient Definition */}
           <defs>

@@ -27,12 +27,16 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta
+          name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+        />
+        <meta
           name="format-detection"
           content="telephone=no, date=no, email=no, address=no"
         />
       </head>
       <body
-        className={`${montserrat.variable} antialiased`}
+        className={`${montserrat.variable} antialiased overflow-x-hidden max-w-full`}
       >
         <SessionProvider>
           <TopBar />

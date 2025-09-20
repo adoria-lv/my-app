@@ -55,6 +55,8 @@ export default function SubServiceDetailPage() {
 
   useEffect(() => {
     if (slug && subSlug) {
+      // Scroll to top when page loads or parameters change
+      window.scrollTo(0, 0)
       fetchSubService()
     }
   }, [slug, subSlug])
@@ -107,98 +109,121 @@ export default function SubServiceDetailPage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-white to-gray-50/50 overflow-x-hidden">
-      <div className="max-w-[1250px] mx-auto px-4 sm:px-6 py-4 sm:py-8">
-        {/* Breadcrumb */}
-        <div className="mb-6 sm:mb-8">
-          <Breadcrumb items={breadcrumbItems} />
+      {/* Full-width Hero Header */}
+      <div className="relative bg-gradient-to-br from-slate-50 via-white to-gray-50/30 border-b border-gray-200/50 overflow-hidden">
+        {/* Background decorations */}
+        <div className="absolute inset-0">
+          <div className="absolute top-8 left-4 sm:top-16 sm:left-8 lg:top-20 lg:left-20 w-24 h-24 sm:w-32 sm:h-32 lg:w-80 lg:h-80 bg-gradient-to-br from-[#B7AB96]/10 to-[#706152]/5 rounded-full blur-2xl lg:blur-3xl" />
+          <div className="absolute bottom-8 right-4 sm:bottom-10 sm:right-10 lg:bottom-10 lg:right-10 w-32 h-32 sm:w-48 sm:h-48 lg:w-96 lg:h-96 bg-gradient-to-tl from-[#706152]/8 to-[#B7AB96]/6 rounded-full blur-2xl lg:blur-3xl" />
+          <div className="absolute top-1/3 right-1/3 w-20 h-20 sm:w-32 sm:h-32 lg:w-64 lg:h-64 bg-[#B7AB96]/4 rounded-full blur-xl lg:blur-2xl" />
         </div>
 
-        {/* Header */}
-        <div className="bg-white rounded-2xl sm:rounded-3xl shadow-lg overflow-hidden mb-8 sm:mb-12">
-          <div className="bg-gradient-to-r from-[#B7AB96] via-[#a59885] to-[#706152] p-6 sm:p-8 lg:p-12 text-white relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent" />
+        <div className="relative z-10 max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-16">
+          {/* Breadcrumb */}
+          <div className="mb-6 md:mb-2">
+            <div className="inline-block backdrop-blur-sm rounded-lg px-3 py-2 bg-white/90">
+              <Breadcrumb items={breadcrumbItems} />
+            </div>
+          </div>
 
-            <div className="relative z-10 grid lg:grid-cols-3 gap-6 sm:gap-8 items-start lg:items-center">
-              <div className="lg:col-span-2">
-                <div className="flex items-center gap-3 sm:gap-4 mb-3 sm:mb-4">
-                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-white/20 backdrop-blur-sm rounded-xl flex items-center justify-center">
-                    <Image
-                      src={subService.service.icon}
-                      alt={subService.service.title}
-                      width={20}
-                      height={20}
-                      className="brightness-0 invert sm:w-6 sm:h-6"
-                    />
+          {/* Hero Content */}
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+            <div className="lg:col-span-8">
+
+              {/* Title */}
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-[#706152] mb-4 leading-tight">
+                {subService.title}
+              </h1>
+
+              {/* Description */}
+              <p className="text-lg md:text-xl text-[#706152]/80 mb-6 md:mb-8 leading-relaxed max-w-2xl">
+                {subService.description}
+              </p>
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                <AppointmentDialog defaultService={subService.title}>
+                  <div className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 py-3 md:px-8 md:py-4 bg-gradient-to-r from-[#B7AB96] via-[#a59885] to-[#706152] text-white rounded-xl font-bold hover:shadow-xl hover:shadow-[#B7AB96]/30 hover:-translate-y-1 transition-all duration-300 cursor-pointer text-sm md:text-base">
+                    <Calendar className="w-5 h-5" />
+                    Pieteikt vizīti
                   </div>
-                  <span className="text-xs sm:text-sm opacity-75">{subService.service.title}</span>
-                </div>
-
-                <h1 className="services-heading">
-                  {subService.title}
-                </h1>
-
-                <p className="text-base sm:text-lg opacity-90 mb-5 sm:mb-6 leading-relaxed">
-                  {subService.description}
-                </p>
-
-                <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
-                  <AppointmentDialog defaultService={subService.title}>
-                    <div className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 bg-white text-[#706152] rounded-xl font-bold hover:bg-gray-50 transition-all duration-300 cursor-pointer text-sm sm:text-base">
-                      <Phone className="w-4 h-4 sm:w-5 sm:h-5" />
-                      Pieteikt vizīti
-                    </div>
-                  </AppointmentDialog>
-                  <Link
-                    href={subService.service.href}
-                    className="inline-flex items-center justify-center gap-2 sm:gap-3 px-4 sm:px-6 py-3 bg-white/20 backdrop-blur-sm rounded-xl font-bold hover:bg-white/30 transition-all duration-300 text-sm sm:text-base"
-                  >
-                    <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5" />
-                    Citi pakalpojumi
-                  </Link>
-                </div>
+                </AppointmentDialog>
+                <Link
+                  href={subService.service.href}
+                  className="inline-flex items-center justify-center gap-2 sm:gap-3 px-6 py-3 md:px-8 md:py-4 bg-white/80 backdrop-blur-sm text-[#706152] rounded-xl font-bold hover:bg-white hover:shadow-lg border border-gray-200/50 hover:border-[#B7AB96]/30 transition-all duration-300 text-sm md:text-base"
+                >
+                  <ArrowLeft className="w-5 h-5" />
+                  Atpakaļ uz {subService.service.title}
+                </Link>
               </div>
+            </div>
 
-              <div className="lg:col-span-1 mt-6 lg:mt-0">
-                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 sm:p-6">
-                  <h3 className="font-bold mb-3 sm:mb-4 text-center text-sm sm:text-base">Pakalpojuma detaļas</h3>
+            {/* Service Details Card */}
+            <div className="lg:col-span-4">
+              <div className="bg-white/90 backdrop-blur-xl rounded-2xl p-6 md:p-8 shadow-lg shadow-[#B7AB96]/10 border border-gray-200/50 hover:shadow-xl hover:shadow-[#B7AB96]/15 transition-all duration-500">
+                <div className="flex items-center gap-3 mb-6 justify-center">
+                  <div className="w-8 h-8 bg-gradient-to-br from-[#B7AB96] to-[#706152] rounded-xl flex items-center justify-center">
+                    <Heart className="w-4 h-4 text-white" />
+                  </div>
+                  <h3 className="text-lg font-bold text-[#706152]">Pakalpojuma detaļas</h3>
+                </div>
 
-                  <div className="space-y-3">
-                    {subService.duration && (
-                      <div className="flex items-center gap-3">
-                        <Clock className="w-4 h-4 sm:w-5 sm:h-5 opacity-75 flex-shrink-0" />
-                        <div>
-                          <div className="text-xs sm:text-sm opacity-75">Ilgums</div>
-                          <div className="font-medium text-sm sm:text-base">{subService.duration}</div>
-                        </div>
+                <div className="space-y-4">
+                  {subService.duration && (
+                    <div className="flex items-center gap-4 p-3 rounded-xl bg-gradient-to-r from-gray-50/50 to-white/30">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#B7AB96]/20 to-[#706152]/10 rounded-xl flex items-center justify-center">
+                        <Clock className="w-5 h-5 text-[#B7AB96]" />
                       </div>
-                    )}
-
-                    {subService.price && (
-                      <div className="flex items-center gap-3">
-                        <Euro className="w-4 h-4 sm:w-5 sm:h-5 opacity-75 flex-shrink-0" />
-                        <div>
-                          <div className="text-xs sm:text-sm opacity-75">Cena</div>
-                          <div className="font-medium text-sm sm:text-base">{subService.price}</div>
-                        </div>
-                      </div>
-                    )}
-
-                    <div className="flex items-center gap-3">
-                      <Users className="w-4 h-4 sm:w-5 sm:h-5 opacity-75 flex-shrink-0" />
                       <div>
-                        <div className="text-xs sm:text-sm opacity-75">Pieejams</div>
-                        <div className="font-medium text-sm sm:text-base">Ar pierakstu</div>
+                        <div className="text-sm text-[#706152]/70 font-medium">Ilgums</div>
+                        <div className="font-bold text-[#706152]">{subService.duration}</div>
                       </div>
                     </div>
+                  )}
+
+                  {subService.price && (
+                    <div className="flex items-center gap-4 p-3 rounded-xl bg-gradient-to-r from-gray-50/50 to-white/30">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#B7AB96]/20 to-[#706152]/10 rounded-xl flex items-center justify-center">
+                        <Euro className="w-5 h-5 text-[#B7AB96]" />
+                      </div>
+                      <div>
+                        <div className="text-sm text-[#706152]/70 font-medium">Cena</div>
+                        <div className="font-bold text-[#706152]">{subService.price}</div>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-center gap-4 p-3 rounded-xl bg-gradient-to-r from-gray-50/50 to-white/30">
+                    <div className="w-10 h-10 bg-gradient-to-br from-[#B7AB96]/20 to-[#706152]/10 rounded-xl flex items-center justify-center">
+                      <Users className="w-5 h-5 text-[#B7AB96]" />
+                    </div>
+                    <div>
+                      <div className="text-sm text-[#706152]/70 font-medium">Pieejamība</div>
+                      <div className="font-bold text-[#706152]">Ar iepriekšēju pierakstu</div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Quick Contact */}
+                <div className="mt-6 pt-6 border-t border-gray-200/50">
+                  <div className="text-center">
+                    <p className="text-sm text-[#706152]/70 mb-3">Nepieciešama konsultācija?</p>
+                    <Link
+                      href="tel:+37167315000"
+                      className="inline-flex items-center gap-2 text-[#B7AB96] hover:text-[#706152] font-medium transition-colors"
+                    >
+                      <Phone className="w-4 h-4" />
+                      <span className="text-sm">67 315 000</span>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
-
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-white/10 rounded-full blur-xl" />
-            <div className="absolute -bottom-4 -left-4 w-24 h-24 bg-white/10 rounded-full blur-xl" />
           </div>
         </div>
+      </div>
+
+      <div className="max-w-[1250px] mx-auto px-4 sm:px-6 py-8 sm:py-12">
 
         {/* Contact Form & Gallery Side by Side */}
         <section className="py-8 md:py-12 bg-gradient-to-br from-slate-50 via-white to-gray-50/30 relative overflow-hidden mb-8 sm:mb-12">
@@ -288,18 +313,7 @@ export default function SubServiceDetailPage() {
         {subService.content && (
           <div className="sm:bg-white sm:rounded-2xl sm:shadow-lg p-0 sm:p-6 lg:p-8 mb-8 sm:mb-12">
             <div className="max-w-4xl mx-auto">
-              <div className="prose prose-sm sm:prose md:prose-lg mx-auto subServices-heading
-                    [&_p]:text-[#706152] [&_p]:mt-3 [&_p]:mb-2 [&_p]:sm:mb-0 [&_p]:text-sm [&_p]:sm:text-base [&_p]:md:text-lg [&_p]:px-0 [&_p]:sm:px-6 [&_p]:lg:px-8
-                    [&_li]:text-[#706152] [&_li]:text-sm [&_li]:sm:text-base [&_li]:md:text-lg [&_li]:px-0 [&_li]:sm:px-6 [&_li]:lg:px-8
-                    [&_ul]:px-0 [&_ul]:sm:px-6 [&_ul]:lg:px-8 [&_ol]:px-0 [&_ol]:sm:px-6 [&_ol]:lg:px-8
-                    [&_h1]:px-0 [&_h1]:sm:px-6 [&_h1]:lg:px-8 [&_h1]:text-lg [&_h1]:sm:text-xl [&_h1]:md:text-2xl [&_h1]:lg:text-3xl
-                    [&_h2]:px-0 [&_h2]:sm:px-6 [&_h2]:lg:px-8 [&_h2]:text-base [&_h2]:sm:text-lg [&_h2]:md:text-xl [&_h2]:lg:text-2xl
-                    [&_h3]:px-0 [&_h3]:sm:px-6 [&_h3]:lg:px-8 [&_h3]:pt-2 [&_h3]:text-sm [&_h3]:sm:text-base [&_h3]:md:text-lg [&_h3]:lg:text-xl
-                    [&_a]:text-[#B7AB96] [&_a]:underline hover:[&_a]:text-[#706152] [&_a]:break-words
-                    [&_p]:leading-relaxed [&_li]:mt-1 [&_li]:sm:mt-2 [&_li]:mb-2 [&_li]:sm:mb-2
-                    [&_img]:rounded-lg [&_img]:shadow-sm [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto
-                    [&_table]:text-sm [&_table]:sm:text-base [&_table]:mx-auto
-                    [&_*]:max-w-full [&_*]:overflow-hidden [&_*]:break-words"
+              <div className="mx-auto subServices-heading"
               >
               {parseServiceContentWithReadMore(subService.content || '')}
               </div>

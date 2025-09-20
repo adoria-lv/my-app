@@ -1,4 +1,3 @@
-// components/ui/FAQ.tsx
 'use client'
 
 import { useState, useEffect } from 'react'
@@ -144,7 +143,7 @@ export default function FAQ() {
               placeholder="Meklēt jautājumus..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full pl-12 sm:pl-14 pr-12 h-12 rounded-xl bg-gray-50/50 border border-gray-200 focus:bg-white hover:bg-white shadow-sm hover:shadow-md focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none focus:border-[#B7AB96] transition-all duration-300 font-medium text-sm sm:text-base placeholder:text-gray-500"
+              className="w-full pl-12 sm:pl-14 pr-12 h-12 rounded-xl bg-gray-50/50 border border-gray-200 focus:bg-white hover:bg-white shadow-sm hover:shadow-md focus:outline-none focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none focus:border-[#B7AB96] transition-all duration-300 font-medium text-base placeholder:text-gray-500"
             />
             {searchTerm && (
               <button

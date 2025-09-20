@@ -52,6 +52,8 @@ export default function SubSubServiceDetailPage() {
 
   useEffect(() => {
     if (slug && subSlug && subSubSlug) {
+      // Scroll to top when page loads or parameters change
+      window.scrollTo(0, 0)
       fetchSubSubService()
     }
   }, [slug, subSlug, subSubSlug])
@@ -288,18 +290,7 @@ export default function SubSubServiceDetailPage() {
         {subSubService.content && (
           <div className="sm:bg-white sm:rounded-2xl sm:shadow-lg p-0 sm:p-6 lg:p-8 mb-8 sm:mb-12">
             <div className="max-w-4xl mx-auto">
-              <div className="prose prose-sm sm:prose md:prose-lg mx-auto subServices-heading
-                    [&_p]:text-[#706152] [&_p]:mt-3 [&_p]:mb-2 [&_p]:sm:mb-0 [&_p]:text-sm [&_p]:sm:text-base [&_p]:md:text-lg [&_p]:px-0 [&_p]:sm:px-6 [&_p]:lg:px-8
-                    [&_li]:text-[#706152] [&_li]:text-sm [&_li]:sm:text-base [&_li]:md:text-lg [&_li]:px-0 [&_li]:sm:px-6 [&_li]:lg:px-8
-                    [&_ul]:px-0 [&_ul]:sm:px-6 [&_ul]:lg:px-8 [&_ol]:px-0 [&_ol]:sm:px-6 [&_ol]:lg:px-8
-                    [&_h1]:px-0 [&_h1]:sm:px-6 [&_h1]:lg:px-8 [&_h1]:text-lg [&_h1]:sm:text-xl [&_h1]:md:text-2xl [&_h1]:lg:text-3xl
-                    [&_h2]:px-0 [&_h2]:sm:px-6 [&_h2]:lg:px-8 [&_h2]:text-base [&_h2]:sm:text-lg [&_h2]:md:text-xl [&_h2]:lg:text-2xl
-                    [&_h3]:px-0 [&_h3]:sm:px-6 [&_h3]:lg:px-8 [&_h3]:pt-2 [&_h3]:text-sm [&_h3]:sm:text-base [&_h3]:md:text-lg [&_h3]:lg:text-xl
-                    [&_a]:text-[#B7AB96] [&_a]:underline hover:[&_a]:text-[#706152] [&_a]:break-words
-                    [&_p]:leading-relaxed [&_li]:mt-1 [&_li]:sm:mt-2 [&_li]:mb-2 [&_li]:sm:mb-2
-                    [&_img]:rounded-lg [&_img]:shadow-sm [&_img]:max-w-full [&_img]:h-auto [&_img]:mx-auto
-                    [&_table]:text-sm [&_table]:sm:text-base [&_table]:mx-auto
-                    [&_*]:max-w-full [&_*]:overflow-hidden [&_*]:break-words"
+              <div className="mx-auto subServices-heading"
               >
               {parseServiceContentWithReadMore(subSubService.content || '')}
               </div>

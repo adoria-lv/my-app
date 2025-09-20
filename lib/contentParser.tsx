@@ -2,27 +2,6 @@ import React from 'react'
 import ReadMore from '@/app/components/ui/ReadMore'
 import ServiceReadMore from '@/app/components/ui/ServiceReadMore'
 
-/**
- * ReadMore Content Parser
- *
- * This parser allows users to insert ReadMore components anywhere in their content
- * using a simple marker syntax in the QuillEditor.
- *
- * Usage:
- * 1. In the QuillEditor, click the "Lasīt vairāk" button in the toolbar
- * 2. This inserts a [READMORE] marker at the cursor position
- * 3. All content AFTER this marker will be collapsible
- *
- * Marker syntax:
- * - Basic: [READMORE]
- * - With custom height: [READMORE maxHeight="300"]
- * - With custom button text: [READMORE buttonText="Skatīt vairāk"]
- * - With custom collapse text: [READMORE collapseText="Paslēpt"]
- * - All options: [READMORE maxHeight="300" buttonText="Skatīt vairāk" collapseText="Paslēpt"]
- *
- * Example content:
- * "This is visible content. [READMORE maxHeight="200"] This content will be collapsible."
- */
 const READMORE_REGEX = /<p[^>]*>\s*\[READMORE(?:\s+maxHeight="(\d+)")?(?:\s+buttonText="([^"]*)")?(?:\s+collapseText="([^"]*)")?\]\s*<\/p>|\[READMORE(?:\s+maxHeight="(\d+)")?(?:\s+buttonText="([^"]*)")?(?:\s+collapseText="([^"]*)")?\]/g
 
 interface ReadMoreConfig {

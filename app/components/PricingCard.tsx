@@ -32,8 +32,8 @@ export default function PricingCard({ title, items, className }: PricingCardProp
       className
     )}>
       {/* Mobile-optimized Floating Background Elements */}
-      <div className="absolute -top-4 -right-4 sm:-top-6 sm:-right-6 lg:-top-10 lg:-right-10 w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 bg-[#B7AB96]/5 rounded-full blur-xl sm:blur-2xl"></div>
-      <div className="absolute -bottom-3 -left-3 sm:-bottom-4 sm:-left-4 lg:-bottom-8 lg:-left-8 w-10 h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-20 bg-[#706152]/5 rounded-full blur-lg sm:blur-xl"></div>
+      <div className="absolute top-0 right-0 w-12 h-12 sm:w-16 sm:h-16 lg:w-24 lg:h-24 bg-[#B7AB96]/5 rounded-full blur-xl sm:blur-2xl"></div>
+      <div className="absolute bottom-0 left-0 w-10 h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-20 bg-[#706152]/5 rounded-full blur-lg sm:blur-xl"></div>
 
       <div
         className="w-full hover:bg-gradient-to-r hover:from-[#B7AB96]/5 hover:to-transparent transition-all duration-300 cursor-pointer active:bg-[#B7AB96]/5"
