@@ -253,7 +253,7 @@ export default function PieteiktViziti() {
                 <Clock className="w-6 h-6 md:w-7 md:h-7 text-[#B7AB96]" />
               </div>
               <h3 className="text-sm font-semibold text-[#706152] mb-1">Ātri un ērti</h3>
-              <p className="text-xs text-[#706152]/70">Pieteikšanās 2 minūtēs</p>
+              <p className="text-xs text-[#706152]/70">Pieteikšanās 1 minūtes laikā</p>
             </div>
           </div>
 
